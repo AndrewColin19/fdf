@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acolin <acolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/28 13:22:16 by acolin            #+#    #+#             */
-/*   Updated: 2021/10/29 16:54:58 by acolin           ###   ########.fr       */
+/*   Created: 2021/10/20 09:24:41 by acolin            #+#    #+#             */
+/*   Updated: 2021/10/29 16:41:35 by acolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-int	main(int argc, char *argv[])
-{
-	if (argc != 2)
-	{
-		int fd;
-		char *line;
-		t_mwin	mwin;
+# include <stdlib.h>
+# include <unistd.h>
 
-		mwin.mlx = mlx_init();
-		mwin.win = mlx_new_window(mwin.mlx, 500, 500, "fdf");
-		fd = open(argv[1], O_RDONLY);
-		line = get_next_line(fd);
-		mlx_loop(mwin.mlx);
-	}
-}
+char	*get_next_line(int fd);
+int		cpy_buf(char **s, char buf);
+char	*ft_strncpy(char *dst, char *src, int n);
+
+#endif

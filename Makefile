@@ -2,14 +2,14 @@ NAME = fdf
 CFLAGS = -Wall -Wextra -Werror
 CC = gcc
 RM = rm -f
-SRCS = srcs/main.c srcs/ft_itoa.c
+SRCS = srcs/main.c srcs/ft_itoa.c srcs/ft_draw_line.c
 
 OBJC = ${SRCS:.c=.o}
 
 all: ${NAME}
 	
 ${NAME}: ${OBJC}
-	$(CC) ${CFLAGS} -lmlx -framework OpenGL -framework AppKit ${OBJC} -o $(NAME)
+	${CC} ${CFLAGS} -lmlx -framework OpenGL -framework AppKit ${OBJC} -o ${NAME}
 	
 clean:
 	 ${RM} ${OBJC}
