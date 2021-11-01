@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_init_window.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acolin <acolin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: andrew <andrew@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/20 09:24:41 by acolin            #+#    #+#             */
-/*   Updated: 2021/10/29 16:41:35 by acolin           ###   ########.fr       */
+/*   Created: 2021/11/01 14:50:12 by andrew            #+#    #+#             */
+/*   Updated: 2021/11/01 22:58:14 by andrew           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "utils.h"
 
-# include <stdlib.h>
-# include <unistd.h>
+t_mwin	ft_init_window(int height, int width)
+{
+	t_mwin	mwin;
 
-char	*get_next_line(int fd);
-int		cpy_buf(char **s, char buf);
-char	*ft_strncpy(char *dst, char *src, int n);
-
-#endif
+	mwin.mlx = mlx_init();
+	mwin.win = mlx_new_window(mwin.mlx, width, height, "fdf");
+	return (mwin);
+}

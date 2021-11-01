@@ -1,50 +1,66 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tracer.c                                        :+:      :+:    :+:   */
+/*   ft_draw_line.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acolin <acolin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: andrew <andrew@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 16:13:09 by acolin            #+#    #+#             */
-/*   Updated: 2021/10/29 16:08:25 by acolin           ###   ########.fr       */
+/*   Updated: 2021/10/30 22:17:15 by andrew           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-void	ft_init_utils(t_coor *coor)
+t_coor	ft_set_coor(int x1, int y1, int x2, int y2)
 {
-	coor->dx = abs(coor->x2 - coor->x1);
-	coor->dy = -abs(coor->y2 - coor->y1);
-	if (coor->x1 < coor->x2)
-		coor->sx = 1;
-	else
-		coor->sx = -1;
-	if (coor->y1 < coor->y2)
-		coor->sy = 1;
-	else
-		coor->sy = -1;
-	coor->e = coor->dx + coor->dy;
+	t_coor	coor;
+
+	coor.x1 = x1;
+	coor.y1 = y1;
+	coor.x2 = x2;
+	coor.y2 = y2;
+	return (coor);
 }
 
-void	ft_draw_line(t_coor coor, t_mwin *mwin, int color)
+static t_calc	ft_init_clac(t_coor coor)
 {
-	ft_init_utils(&coor);
+	t_calc	calc;
+
+	calc.dx = abs(coor.x2 - coor.x1);
+	calc.dy = -abs(coor.y2 - coor.y1);
+	if (coor.x1 < coor.x2)
+		calc.sx = 1;
+	else
+		calc.sx = -1;
+	if (coor.y1 < coor.y2)
+		calc.sy = 1;
+	else
+		calc.sy = -1;
+	calc.e = calc.dx + calc.dy;
+	return (calc);
+}
+
+void	ft_draw_line(t_coor coor, t_mwin mwin, int color)
+{
+	t_calc	calc;
+
+	calc = ft_init_clac(coor);
 	while (1)
 	{
-		mlx_pixel_put(mwin->mlx, mwin->win, coor.x1, coor.y1, color);
+		mlx_pixel_put(mwin.mlx, mwin.win, coor.x1, coor.y1, color);
 		if (coor.x1 == coor.x2 && coor.y1 == coor.y2)
 			break ;
-		coor.e2 = 2 * coor.e;
-		if (coor.e2 >= coor.dy)
+		calc.e2 = 2 * calc.e;
+		if (calc.e2 >= calc.dy)
 		{
-			coor.e += coor.dy;
-			coor.x1 += coor.sx;
+			calc.e += calc.dy;
+			coor.x1 += calc.sx;
 		}
-		if (coor.e2 <= coor.dx)
+		if (calc.e2 <= calc.dx)
 		{
-			coor.e += coor.dx;
-			coor.y1 += coor.sy;
+			calc.e += calc.dx;
+			coor.y1 += calc.sy;
 		}	
 	}
 }
