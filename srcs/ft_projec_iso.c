@@ -6,7 +6,7 @@
 /*   By: acolin <acolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 13:41:46 by andrew            #+#    #+#             */
-/*   Updated: 2021/11/02 11:31:23 by acolin           ###   ########.fr       */
+/*   Updated: 2021/11/02 16:30:15 by acolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,13 @@ t_point	rotate_z(t_point p, double gamma)
 	return (p);
 }
 
-t_point	isometric_projection(t_point p)
+t_point	iso_proj(t_point p, t_map map)
 {
 	t_point	save;
 
 	save.x = p.x;
 	save.y = p.y;
-	p.x = (save.x - save.y) * cos(0.523599);
-	p.y = (save.x + save.y) * sin(0.523599) - p.z;
-	return (p);
-}
-
-t_point	ft_project(t_point p)
-{
-	p = isometric_projection(p);
+	p.x = (save.x - save.y) + map.scale * cos(0.5);
+	p.y = (save.x + save.y) + map.scale * sin(0.5) - p.z;
 	return (p);
 }

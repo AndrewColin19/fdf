@@ -6,7 +6,7 @@
 /*   By: acolin <acolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 13:22:16 by acolin            #+#    #+#             */
-/*   Updated: 2021/11/02 13:40:25 by acolin           ###   ########.fr       */
+/*   Updated: 2021/11/02 16:07:46 by acolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,10 @@ t_map	ft_init_map(t_map map)
 {
 	map.height = 1080;
 	map.width = 1920;
-	map.scale = 20;
+	map.scale = 70;
 	map.divw = 3;
 	map.divh = 3;
+	map.mult = 10;
 	map.mwin = ft_init_window(map.height, map.width);
 	return (map);
 }
@@ -45,6 +46,7 @@ int	main(int argc, char *argv[])
 		map = ft_init_map(map);
 		ft_draw_map(map);
 		mlx_mouse_hook(map.mwin.win, ft_mouse_event, &map);
+		mlx_key_hook(map.mwin.win, ft_key_event, &map);
 		mlx_loop(map.mwin.mlx);
 	}
 	else

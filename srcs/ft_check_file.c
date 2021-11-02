@@ -6,7 +6,7 @@
 /*   By: acolin <acolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 19:21:49 by andrew            #+#    #+#             */
-/*   Updated: 2021/11/02 10:21:33 by acolin           ###   ########.fr       */
+/*   Updated: 2021/11/02 15:59:22 by acolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,13 @@ int	ft_check_line(char *line)
 	i = 0;
 	while (line[i] != '\0' && line[i] != '\n')
 	{
-		while (line[i] == ' ')
+		/*while (line[i] == ' ')
 			i++;
 		if (line[i] == '-')
 			i++;
 		while (ft_isdigit(line[i]))
-			i++;
+			i++;*/
+		i++;
 	}
 	return (1);
 }
