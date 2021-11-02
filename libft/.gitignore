@@ -1,0 +1,8 @@
+.vscode
+libftTester
+*.swp
+*.tmp
+.DS_Store
+*.exe
+*.a
+*.out
