@@ -6,49 +6,36 @@
 /*   By: acolin <acolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 16:13:09 by acolin            #+#    #+#             */
-/*   Updated: 2021/11/02 12:57:38 by acolin           ###   ########.fr       */
+/*   Updated: 2021/11/02 16:39:50 by acolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-int	ft_set_color(t_coor coor)
+int	ft_set_color(t_point point1, t_point point2)
 {
 	int	color;
 
-	if (coor.z1 == coor.z2 && coor.z1 > 0)
+	if (point1.z == point2.z && point1.z > 0)
 		color = 0x00FF00FF;
-	else if (coor.z1 == coor.z2)
+	else if (point1.z == point2.z)
 		color = 0x0021A82D;
 	else
 		color = 0x006B656B;
 	return (color);
 }
 
-t_coor	ft_set_coor(t_point old_point, t_point point)
-{
-	t_coor	coor;
-
-	coor.x1 = old_point.x;
-	coor.y1 = old_point.y;
-	coor.z1 = old_point.z;
-	coor.x2 = point.x;
-	coor.y2 = point.y;
-	coor.z2 = point.z;
-	return (coor);
-}
-
-static t_calc	ft_init_calc(t_coor coor)
+static t_calc	ft_init_calc(t_point point1, t_point point2)
 {
 	t_calc	calc;
 
-	calc.dx = abs(coor.x2 - coor.x1);
-	calc.dy = -abs(coor.y2 - coor.y1);
-	if (coor.x1 < coor.x2)
+	calc.dx = abs(point2.x - point1.x);
+	calc.dy = -abs(point2.y - point1.y);
+	if (point1.x < point2.x)
 		calc.sx = 1;
 	else
 		calc.sx = -1;
-	if (coor.y1 < coor.y2)
+	if (point1.y < point2.y)
 		calc.sy = 1;
 	else
 		calc.sy = -1;
@@ -56,26 +43,26 @@ static t_calc	ft_init_calc(t_coor coor)
 	return (calc);
 }
 
-void	ft_draw_line(t_coor coor, t_mwin mwin)
+void	ft_draw_line(t_point point1, t_point point2, t_mwin mwin)
 {
 	t_calc	calc;
 
-	calc = ft_init_calc(coor);
+	calc = ft_init_calc(point1, point2);
 	while (1)
 	{
-		mlx_pixel_put(mwin.mlx, mwin.win, coor.x1, coor.y1, ft_set_color(coor));
-		if (coor.x1 == coor.x2 && coor.y1 == coor.y2)
+		mlx_pixel_put(mwin.mlx, mwin.win, point1.x, point1.y, ft_set_color(point1, point2));
+		if (point1.x == point2.x && point1.y == point2.y)
 			break ;
 		calc.e2 = 2 * calc.e;
 		if (calc.e2 >= calc.dy)
 		{
 			calc.e += calc.dy;
-			coor.x1 += calc.sx;
+			point1.x += calc.sx;
 		}
 		if (calc.e2 <= calc.dx)
 		{
 			calc.e += calc.dx;
-			coor.y1 += calc.sy;
+			point1.y += calc.sy;
 		}	
 	}
 }

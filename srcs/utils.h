@@ -6,7 +6,7 @@
 /*   By: acolin <acolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 13:56:03 by acolin            #+#    #+#             */
-/*   Updated: 2021/11/02 16:30:30 by acolin           ###   ########.fr       */
+/*   Updated: 2021/11/02 16:58:25 by acolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_calc
 typedef struct s_map
 {
 	int		**map;
+	t_point	**tpoint;
 	int		nbline;
 	int		nbcol;
 	int		scale;
@@ -71,13 +72,13 @@ typedef struct s_point
 }	t_point;
 
 t_coor	ft_set_coor(t_point old_point, t_point point);
-void	ft_draw_line(t_coor coor, t_mwin mwin);
+void	ft_draw_line(t_point point1, t_point point2, t_mwin mwin);
 char	*get_next_line(int fd);
 int		ft_check_file(char *path, t_map	*map);
 int		ft_parse_file(char *path, t_map	*map);
 int		ft_draw_map(t_map map);
 t_point	iso_proj(t_point p, t_map map);
-t_point	ft_set_point(int x, int y, int z);
+t_point	set_point(int x, int y, int z);
 int		ft_error_file(void);
 int		ft_error_data(void);
 int		ft_mouse_event(int button, int x, int y, void *param);
