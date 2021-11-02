@@ -3,26 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   ft_draw_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acolin <acolin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: andrew <andrew@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 14:46:51 by andrew            #+#    #+#             */
-/*   Updated: 2021/11/02 16:42:13 by acolin           ###   ########.fr       */
+/*   Updated: 2021/11/02 21:13:23 by andrew           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-t_point	set_point(int x, int y, int z)
+void	set_point_x(t_point	*point, t_point start)
 {
-	t_point	point;
-
-	point.x = x;
-	point.y = y;
-	point.z = z;
-	return (point);
+	
 }
 
-void	draw(t_map map, t_point st)
+void	set_point_y(t_point	*point, t_point start)
+{
+	
+}
+
+void	draw(t_point start, t_map map)
 {
 	int		i;
 	int		j;
@@ -34,17 +34,19 @@ void	draw(t_map map, t_point st)
 		while (++j < map.nbline)
 		{
 			if (i + 1 < map.nbcol)
-				ft_draw_line()
+				ft_draw_line(map.tpoint[i][j], map.tpoint[i + 1][j], map.mwin);
 			if (j + 1 < map.nbline)
+				ft_draw_line(map.tpoint[i][j], map.tpoint[i][j + 1], map.mwin);
 		}
+	}
 }
 
 int	ft_draw_map(t_map map)
 {
 	t_point	start;
 
-	start = set_point((map.width / map.divw), (-map.height / map.divh), 0);
-	ft_draw_ligne(map, start);
-	ft_draw_col(map, start);
+	start.x = (map.width / map.divw);
+	start.y = (-map.height / map.divh);
+	draw(start, map);
 	return (1);
 }

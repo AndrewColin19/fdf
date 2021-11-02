@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acolin <acolin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: andrew <andrew@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 13:22:16 by acolin            #+#    #+#             */
-/*   Updated: 2021/11/02 16:07:46 by acolin           ###   ########.fr       */
+/*   Updated: 2021/11/02 21:22:17 by andrew           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_map	ft_init_map(t_map map)
 	map.divh = 3;
 	map.mult = 10;
 	map.mwin = ft_init_window(map.height, map.width);
+	ft_gen_point(&map);
 	return (map);
 }
 
