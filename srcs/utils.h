@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrew <andrew@student.42.fr>              +#+  +:+       +#+        */
+/*   By: acolin <acolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 13:56:03 by acolin            #+#    #+#             */
-/*   Updated: 2021/11/01 23:05:06 by andrew           ###   ########.fr       */
+/*   Updated: 2021/11/02 13:36:41 by acolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdio.h>
-# include "libft/libft.h"
+# include "../libft/libft.h"
 
 typedef struct s_mwin
 {
@@ -35,6 +35,8 @@ typedef struct s_coor
 	int		y1;
 	int		x2;
 	int		y2;
+	int		z1;
+	int		z2;
 }	t_coor;
 
 typedef struct s_calc
@@ -49,11 +51,15 @@ typedef struct s_calc
 
 typedef struct s_map
 {
-	int	**map;
-	int	nbline;
-	int	nbcol;
-	int	x;
-	int	y;
+	int		**map;
+	int		nbline;
+	int		nbcol;
+	int		scale;
+	int		divh;
+	int		divw;
+	int		height;
+	int		width;
+	t_mwin	mwin;
 }	t_map;
 
 typedef struct s_point
@@ -61,21 +67,18 @@ typedef struct s_point
 	int	x;
 	int	y;
 	int	z;
-	int old_x;
-	int old_y;
 }	t_point;
 
-t_coor	ft_set_coor(int x1, int y1, int x2, int y2);
-void	ft_draw_line(t_coor coor, t_mwin mwin, int color);
+t_coor	ft_set_coor(t_point old_point, t_point point);
+void	ft_draw_line(t_coor coor, t_mwin mwin);
 char	*get_next_line(int fd);
 int		ft_check_file(char *path, t_map	*map);
 int		ft_parse_file(char *path, t_map	*map);
-t_mwin	ft_init_window(int height, int width);
-int		ft_draw_map(t_mwin mwin, t_map map, int color);
-int		ft_draw_map2(t_mwin mwin, t_map map, int color);
+int		ft_draw_map(t_map map);
 t_point	ft_project(t_point p);
 t_point	ft_set_point(int x, int y, int z);
 int		ft_error_file(void);
 int		ft_error_data(void);
+int		ft_mouse_event(int button, int x, int y, void *param);
 
 #endif

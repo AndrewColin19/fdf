@@ -5,8 +5,8 @@ NAME= fdf
 SRCS =  srcs/main.c srcs/ft_draw_line.c \
 		srcs/get_next_line.c srcs/ft_check_file.c \
 		srcs/ft_parse_file.c srcs/ft_projec_iso.c \
-		srcs/ft_draw_map.c srcs/ft_init_window.c \
-		srcs/ft_error.c
+		srcs/ft_draw_map.c srcs/ft_error.c \
+		srcs/ft_event.c
 OBJS = ${SRCS:.c=.o}
 LFLAGS = -lmlx
 
