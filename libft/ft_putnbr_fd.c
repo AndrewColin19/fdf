@@ -24,19 +24,17 @@ void	ft_putnbr_fd(int n, int fd)
 	long	nbr;
 
 	nbr = n;
-	if (n == -2147483648)
-		ft_putstr_fd("-2147483648", fd);
-	if (n == 0)
+	if (nbr == 0)
 		ft_putchar_fd('0', fd);
-	if (n && n >= -2147483647 && n <= 2147483647)
+	if (nbr)
 	{
-		if (n < 0)
+		if (nbr < 0)
 		{
 			ft_putchar_fd('-', fd);
-			n = -n;
+			nbr = -nbr;
 		}
-		if (n >= 10)
+		if (nbr >= 10)
 			ft_putnbr_fd((n / 10), fd);
-		ft_putchar_fd(((n % 10) + '0'), fd);
+		ft_putchar_fd(((nbr % 10) + '0'), fd);
 	}
 }
