@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_event.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acolin <acolin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: andrew <andrew@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 12:01:03 by acolin            #+#    #+#             */
-/*   Updated: 2021/11/02 13:38:39 by acolin           ###   ########.fr       */
+/*   Updated: 2021/11/03 18:46:34 by andrew           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,16 @@ int	ft_mouse_event(int button, int x, int y, void *param)
 	map = (t_map *) param;
 	if (button == 4)
 	{
-		map->scale -= 1;
+		if (map->scale - map->zoom > 0)
+			map->scale -= map->zoom;
 		mlx_clear_window(map->mwin.mlx, map->mwin.win);
-		ft_draw_map(*map);
+		ft_draw_map(map);
 	}
 	if (button == 5)
 	{
-		map->scale += 1;
+		map->scale += map->zoom;
 		mlx_clear_window(map->mwin.mlx, map->mwin.win);
-		ft_draw_map(*map);
+		ft_draw_map(map);
 	}
 	return (1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_file.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acolin <acolin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: andrew <andrew@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 19:21:49 by andrew            #+#    #+#             */
-/*   Updated: 2021/11/02 10:21:33 by acolin           ###   ########.fr       */
+/*   Updated: 2021/11/03 18:49:15 by andrew           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	ft_check_line(char *line)
 			i++;
 		while (ft_isdigit(line[i]))
 			i++;
+		i++;
 	}
 	return (1);
 }

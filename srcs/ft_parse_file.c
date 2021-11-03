@@ -6,15 +6,15 @@
 /*   By: andrew <andrew@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 15:57:37 by andrew            #+#    #+#             */
-/*   Updated: 2021/11/01 22:57:40 by andrew           ###   ########.fr       */
+/*   Updated: 2021/11/03 18:48:39 by andrew           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-size_t	ft_tablen(char **tab)
+int	ft_tablen(char **tab)
 {
-	size_t	size;
+	int	size;
 
 	size = 0;
 	while (tab[size])
@@ -24,12 +24,10 @@ size_t	ft_tablen(char **tab)
 
 int	ft_add_map(char **tab, t_map *map, int index)
 {
-	int		i;
-	size_t	size;
+	int	i;
 
-	size = ft_tablen(tab);
-	map->nbcol = size;
-	map->map[index] = malloc(sizeof(int) * size);
+	map->nbcol = ft_tablen(tab);
+	map->map[index] = malloc(sizeof(int) * map->nbcol);
 	if (!map->map[index])
 		return (0);
 	i = 0;
@@ -50,6 +48,8 @@ int	ft_parse_file(char *path, t_map *map)
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 		return (0);
+	map->nbcol = 0;
+	map->nbline = 0;
 	map->map = malloc(sizeof(int *) * map->nbline + 1);
 	line = get_next_line(fd);
 	i = 0;
@@ -58,6 +58,7 @@ int	ft_parse_file(char *path, t_map *map)
 		if (!ft_add_map(ft_split(line, ' '), map, i++))
 			return (0);
 		free(line);
+		map->nbline++;
 		line = get_next_line(fd);
 	}
 	close(fd);

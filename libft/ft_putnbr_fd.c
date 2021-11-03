@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acolin <acolin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: andrew <andrew@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 11:54:10 by acolin            #+#    #+#             */
-/*   Updated: 2021/10/18 16:10:47 by acolin           ###   ########.fr       */
+/*   Updated: 2021/11/03 19:18:06 by andrew           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_putnbr_fd(int n, int fd)
 			nbr = -nbr;
 		}
 		if (nbr >= 10)
-			ft_putnbr_fd((n / 10), fd);
+			ft_putnbr_fd((nbr / 10), fd);
 		ft_putchar_fd(((nbr % 10) + '0'), fd);
 	}
 }

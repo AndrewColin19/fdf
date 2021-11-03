@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acolin <acolin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: andrew <andrew@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 13:22:16 by acolin            #+#    #+#             */
-/*   Updated: 2021/11/02 13:40:25 by acolin           ###   ########.fr       */
+/*   Updated: 2021/11/03 19:02:22 by andrew           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@ t_mwin	ft_init_window(int height, int width)
 	return (mwin);
 }
 
-t_map	ft_init_map(t_map map)
+void	ft_init_map(t_map *map)
 {
-	map.height = 1080;
-	map.width = 1920;
-	map.scale = 20;
-	map.divw = 3;
-	map.divh = 3;
-	map.mwin = ft_init_window(map.height, map.width);
-	return (map);
+	map->height = 1080;
+	map->width = 1920;
+	map->scale = 50;
+	map->zoom = 5;
+	map->mult = 2;
+	map->mwin = ft_init_window(map->height, map->width);
+	ft_gen_point(map);
 }
 
 int	main(int argc, char *argv[])
@@ -38,12 +38,10 @@ int	main(int argc, char *argv[])
 
 	if (argc == 2)
 	{
-		if (!ft_check_file(argv[1], &map))
-			return (0);
 		if (!ft_parse_file(argv[1], &map))
 			return (ft_error_data());
-		map = ft_init_map(map);
-		ft_draw_map(map);
+		ft_init_map(&map);
+		ft_draw_map(&map);
 		mlx_mouse_hook(map.mwin.win, ft_mouse_event, &map);
 		mlx_loop(map.mwin.mlx);
 	}

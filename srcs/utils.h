@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acolin <acolin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: andrew <andrew@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 13:56:03 by acolin            #+#    #+#             */
-/*   Updated: 2021/11/02 13:36:41 by acolin           ###   ########.fr       */
+/*   Updated: 2021/11/03 18:50:38 by andrew           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,19 +49,6 @@ typedef struct s_calc
 	int		e2;
 }	t_calc;
 
-typedef struct s_map
-{
-	int		**map;
-	int		nbline;
-	int		nbcol;
-	int		scale;
-	int		divh;
-	int		divw;
-	int		height;
-	int		width;
-	t_mwin	mwin;
-}	t_map;
-
 typedef struct s_point
 {
 	int	x;
@@ -69,16 +56,32 @@ typedef struct s_point
 	int	z;
 }	t_point;
 
+typedef struct s_map
+{
+	int		**map;
+	t_point	**tpoint;
+	t_point	start;
+	int		nbline;
+	int		nbcol;
+	int		scale;
+	int		height;
+	int		width;
+	int		zoom;
+	int		mult;
+	t_mwin	mwin;
+}	t_map;
+
 t_coor	ft_set_coor(t_point old_point, t_point point);
-void	ft_draw_line(t_coor coor, t_mwin mwin);
+void	ft_draw_line(t_point point1, t_point point2, t_mwin mwin);
 char	*get_next_line(int fd);
 int		ft_check_file(char *path, t_map	*map);
 int		ft_parse_file(char *path, t_map	*map);
-int		ft_draw_map(t_map map);
-t_point	ft_project(t_point p);
-t_point	ft_set_point(int x, int y, int z);
+int		ft_draw_map(t_map *map);
+t_point	iso_proj(t_point p);
+int		ft_gen_point(t_map *map);
 int		ft_error_file(void);
 int		ft_error_data(void);
 int		ft_mouse_event(int button, int x, int y, void *param);
+int		ft_key_event(int key_code, void *param);
 
 #endif
