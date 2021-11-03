@@ -6,7 +6,7 @@
 /*   By: andrew <andrew@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 13:41:46 by andrew            #+#    #+#             */
-/*   Updated: 2021/11/02 21:16:57 by andrew           ###   ########.fr       */
+/*   Updated: 2021/11/03 16:12:10 by andrew           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,5 @@ t_point	rotate_z(t_point p, double gamma)
 	y = p.y;
 	p.x = x * cos(gamma) - y * sin(gamma);
 	p.y = x * sin(gamma) + y * cos(gamma);
-	return (p);
-}
-
-t_point	iso_proj(t_point p)
-{
-	t_point	save;
-
-	save.x = p.x;
-	save.y = p.y;
-	p.x = (save.x - save.y) * cos(0.5);
-	p.y = (save.x + save.y) * sin(0.5) - p.z;
 	return (p);
 }

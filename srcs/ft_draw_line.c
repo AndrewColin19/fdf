@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_draw_line.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acolin <acolin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: andrew <andrew@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 16:13:09 by acolin            #+#    #+#             */
-/*   Updated: 2021/11/02 16:39:50 by acolin           ###   ########.fr       */
+/*   Updated: 2021/11/03 18:43:21 by andrew           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ void	ft_draw_line(t_point point1, t_point point2, t_mwin mwin)
 	calc = ft_init_calc(point1, point2);
 	while (1)
 	{
-		mlx_pixel_put(mwin.mlx, mwin.win, point1.x, point1.y, ft_set_color(point1, point2));
+		mlx_pixel_put(mwin.mlx, mwin.win, point1.x, point1.y,
+			ft_set_color(point1, point2));
 		if (point1.x == point2.x && point1.y == point2.y)
 			break ;
 		calc.e2 = 2 * calc.e;

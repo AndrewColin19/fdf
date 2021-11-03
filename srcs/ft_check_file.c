@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_file.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acolin <acolin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: andrew <andrew@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 19:21:49 by andrew            #+#    #+#             */
-/*   Updated: 2021/11/02 15:59:22 by acolin           ###   ########.fr       */
+/*   Updated: 2021/11/03 18:49:15 by andrew           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ int	ft_check_line(char *line)
 	i = 0;
 	while (line[i] != '\0' && line[i] != '\n')
 	{
-		/*while (line[i] == ' ')
+		while (line[i] == ' ')
 			i++;
 		if (line[i] == '-')
 			i++;
 		while (ft_isdigit(line[i]))
-			i++;*/
+			i++;
 		i++;
 	}
 	return (1);
