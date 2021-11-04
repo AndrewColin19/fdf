@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrew <andrew@student.42.fr>              +#+  +:+       +#+        */
+/*   By: acolin <acolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 13:56:03 by acolin            #+#    #+#             */
-/*   Updated: 2021/11/03 18:50:38 by andrew           ###   ########.fr       */
+/*   Updated: 2021/11/04 17:23:12 by acolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ typedef struct s_mwin
 {
 	void	*win;
 	void	*mlx;
+	void	*img;
+	int		*buffer;
 }	t_mwin;
 
 typedef struct s_coor
@@ -43,10 +45,11 @@ typedef struct s_calc
 {
 	int		dx;
 	int		dy;
-	int		sx;
-	int		sy;
-	int		e;
-	int		e2;
+	int		steps;
+	float	xinc;
+	float	yinc;
+	float	x;
+	float	y;
 }	t_calc;
 
 typedef struct s_point
@@ -72,7 +75,7 @@ typedef struct s_map
 }	t_map;
 
 t_coor	ft_set_coor(t_point old_point, t_point point);
-void	ft_draw_line(t_point point1, t_point point2, t_mwin mwin);
+void	ft_draw_line(t_map *map, t_point a, t_point b);
 char	*get_next_line(int fd);
 int		ft_check_file(char *path, t_map	*map);
 int		ft_parse_file(char *path, t_map	*map);
@@ -81,7 +84,10 @@ t_point	iso_proj(t_point p);
 int		ft_gen_point(t_map *map);
 int		ft_error_file(void);
 int		ft_error_data(void);
+int		ft_error_parse(void);
 int		ft_mouse_event(int button, int x, int y, void *param);
 int		ft_key_event(int key_code, void *param);
+int		ft_error_malloc(void);
+void	clear_img(t_map *map);
 
 #endif

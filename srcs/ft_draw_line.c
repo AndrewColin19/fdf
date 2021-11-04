@@ -3,67 +3,87 @@
 /*                                                        :::      ::::::::   */
 /*   ft_draw_line.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrew <andrew@student.42.fr>              +#+  +:+       +#+        */
+/*   By: acolin <acolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 16:13:09 by acolin            #+#    #+#             */
-/*   Updated: 2021/11/03 18:43:21 by andrew           ###   ########.fr       */
+/*   Updated: 2021/11/04 17:42:06 by acolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-int	ft_set_color(t_point point1, t_point point2)
+void	clear_img(t_map *map)
+{
+	int	x;
+
+	x = map->height * map->width - 1;
+	while (x >= 0)
+	{
+		map->mwin.buffer[x] = 0x00000000;
+		x--;
+	}
+}
+
+void	draw_pixel(t_map *map, int x, int y, int color)
+{
+	if (x < 0 || x >= map->width)
+		return ;
+	if (y < 0 || y >= map->height)
+		return ;
+	map->mwin.buffer[x + y * map->width] = color;
+}
+
+int	ft_set_color(t_point a, t_point b)
 {
 	int	color;
 
-	if (point1.z == point2.z && point1.z > 0)
+	if (a.z == b.z && a.z > 0)
 		color = 0x00FF00FF;
-	else if (point1.z == point2.z)
+	else if (a.z == b.z)
 		color = 0x0021A82D;
 	else
 		color = 0x006B656B;
 	return (color);
 }
 
-static t_calc	ft_init_calc(t_point point1, t_point point2)
+t_calc	ft_init_calc(t_point a, t_point b)
 {
 	t_calc	calc;
 
-	calc.dx = abs(point2.x - point1.x);
-	calc.dy = -abs(point2.y - point1.y);
-	if (point1.x < point2.x)
-		calc.sx = 1;
+	calc.dx = b.x - a.x;
+	calc.dy = b.y - a.y;
+	if (abs(calc.dx) > abs(calc.dy))
+		calc.steps = abs(calc.dx);
 	else
-		calc.sx = -1;
-	if (point1.y < point2.y)
-		calc.sy = 1;
-	else
-		calc.sy = -1;
-	calc.e = calc.dx + calc.dy;
+		calc.steps = abs(calc.dy);
+	calc.xinc = calc.dx / (float) calc.steps;
+	calc.yinc = calc.dy / (float) calc.steps;
+	calc.x = a.x;
+	calc.y = a.y;
 	return (calc);
 }
 
-void	ft_draw_line(t_point point1, t_point point2, t_mwin mwin)
+void	ft_draw_line(t_map *map, t_point a, t_point b)
 {
+	int		i;
 	t_calc	calc;
 
-	calc = ft_init_calc(point1, point2);
-	while (1)
+	if (b.x < 0 || b.x >= map->width)
+		return ;
+	if (b.y < 0 || b.y >= map->height)
+		return ;
+	if (a.x < 0 || a.x >= map->width)
+		return ;
+	if (a.y < 0 || a.y >= map->height)
+		return ;
+	calc = ft_init_calc(a, b);
+	i = 0;
+	while (i <= calc.steps)
 	{
-		mlx_pixel_put(mwin.mlx, mwin.win, point1.x, point1.y,
-			ft_set_color(point1, point2));
-		if (point1.x == point2.x && point1.y == point2.y)
-			break ;
-		calc.e2 = 2 * calc.e;
-		if (calc.e2 >= calc.dy)
-		{
-			calc.e += calc.dy;
-			point1.x += calc.sx;
-		}
-		if (calc.e2 <= calc.dx)
-		{
-			calc.e += calc.dx;
-			point1.y += calc.sy;
-		}	
+		draw_pixel(map, calc.x, calc.y,
+			ft_set_color(a, b));
+		calc.x += calc.xinc;
+		calc.y += calc.yinc;
+		i++;
 	}
 }

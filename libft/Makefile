@@ -6,7 +6,7 @@
 #    By: acolin <acolin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/07 13:09:45 by acolin            #+#    #+#              #
-#    Updated: 2021/10/18 17:42:45 by acolin           ###   ########.fr        #
+#    Updated: 2021/11/04 11:04:14 by acolin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,21 +47,18 @@ SRCS =  ft_isalpha.c \
 		ft_putchar_fd.c \
 		ft_putstr_fd.c \
 		ft_putendl_fd.c \
-		ft_putnbr_fd.c
-
-SRCS_B = 	ft_lstnew.c \
-			ft_lstadd_front.c \
-			ft_lstsize.c \
-			ft_lstlast.c \
-			ft_lstadd_back.c \
-			ft_lstdelone.c \
-			ft_lstclear.c \
-			ft_lstiter.c \
-			ft_lstmap.c
+		ft_putnbr_fd.c \
+		ft_lstnew.c \
+		ft_lstadd_front.c \
+		ft_lstsize.c \
+		ft_lstlast.c \
+		ft_lstadd_back.c \
+		ft_lstdelone.c \
+		ft_lstclear.c \
+		ft_lstiter.c \
+		ft_lstmap.c
 
 OBJS = ${SRCS:.c=.o}
-
-OBJS_B = ${SRCS_B:.c=.o}
 
 all: ${NAME}
 
@@ -71,15 +68,12 @@ all: ${NAME}
 ${NAME}: ${OBJS}
 	${AR} ${NAME} ${OBJS}
 
-bonus: ${OBJS_B} ${OBJS}
-	${AR} ${NAME} ${OBJS} ${OBJS_B}
-
 clean:
-	${RM} ${OBJS} ${OBJS_B}
+	${RM} ${OBJS}
 
 fclean: clean
 	${RM} ${NAME}
 
 re: fclean all
 
-.PHONY: bonus all clean fclean re
+.PHONY: all clean fclean re

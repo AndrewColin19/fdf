@@ -3,39 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse_file.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrew <andrew@student.42.fr>              +#+  +:+       +#+        */
+/*   By: acolin <acolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 15:57:37 by andrew            #+#    #+#             */
-/*   Updated: 2021/11/03 18:48:39 by andrew           ###   ########.fr       */
+/*   Updated: 2021/11/04 17:19:19 by acolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-int	ft_tablen(char **tab)
+size_t	ft_tablen(char **tab)
 {
-	int	size;
+	size_t	i;
 
-	size = 0;
-	while (tab[size])
-		size++;
-	return (size);
+	i = 0;
+	while (tab[i])
+		i++;
+	return (i);
 }
 
-int	ft_add_map(char **tab, t_map *map, int index)
+int	free_tab(char **tab)
 {
 	int	i;
 
-	map->nbcol = ft_tablen(tab);
-	map->map[index] = malloc(sizeof(int) * map->nbcol);
-	if (!map->map[index])
-		return (0);
 	i = 0;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+	return (1);
+}
+
+int	ft_add_map(char *line, t_map *map, int index)
+{
+	int		i;
+	char	**tab;
+
+	tab = ft_split(line, ' ');
+	i = 0;
+	map->map[index] = (int *) malloc(sizeof(int *) * ft_tablen(tab));
 	while (tab[i])
 	{
 		map->map[index][i] = ft_atoi(tab[i]);
 		i++;
 	}
+	map->nbcol = i;
+	free_tab(tab);
 	return (1);
 }
 
@@ -47,19 +62,18 @@ int	ft_parse_file(char *path, t_map *map)
 
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
-		return (0);
-	map->nbcol = 0;
-	map->nbline = 0;
-	map->map = malloc(sizeof(int *) * map->nbline + 1);
+		return (ft_error_file());
+	map->map = (int **) malloc(sizeof(int **) * map->nbline);
 	line = get_next_line(fd);
 	i = 0;
 	while (line)
 	{
-		if (!ft_add_map(ft_split(line, ' '), map, i++))
+		if (ft_add_map(line, map, i) == 0)
 			return (0);
-		free(line);
-		map->nbline++;
+		if (line)
+			free(line);
 		line = get_next_line(fd);
+		i++;
 	}
 	close(fd);
 	return (1);

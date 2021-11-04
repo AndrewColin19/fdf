@@ -18,7 +18,7 @@ else
 	#Linux and others...
 	INC=/usr/include
 	INCLIB=${INC}../lib
-	CFLAGS += -I${INC} -O3 -I.. -g
+	CFLAGS += -I${INC} -O3 -I..
 	LFLAGS += -L.. -L${INCLIB} -lXext -lX11 -lm -no-pie -lbsd
 endif
 
@@ -29,11 +29,11 @@ ${NAME}: ${OBJS}
 	${CC} ${OBJS} ${LFLAGS} ./libft/libft.a -o ${NAME}
 
 fclean: clean
-	${MAKE} clean -C ./libft
+	${MAKE} fclean -C ./libft
 	rm -f ${NAME}
 
 clean:
-	${MAKE} fclean -C ./libft
+	${MAKE} clean -C ./libft
 	rm -f ${NAME} ${OBJS}
 
 re: fclean clean all
