@@ -6,7 +6,7 @@
 /*   By: acolin <acolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 13:56:03 by acolin            #+#    #+#             */
-/*   Updated: 2021/11/04 17:23:12 by acolin           ###   ########.fr       */
+/*   Updated: 2021/11/05 14:36:20 by acolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,14 @@ typedef struct s_map
 	int		**map;
 	t_point	**tpoint;
 	t_point	start;
+	t_point	centre;
 	int		nbline;
 	int		nbcol;
 	int		scale;
 	int		height;
 	int		width;
 	int		zoom;
-	int		mult;
+	int		move;
 	t_mwin	mwin;
 }	t_map;
 

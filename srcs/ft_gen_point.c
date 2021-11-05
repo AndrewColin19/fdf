@@ -6,7 +6,7 @@
 /*   By: acolin <acolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 16:43:22 by acolin            #+#    #+#             */
-/*   Updated: 2021/11/04 17:54:56 by acolin           ###   ########.fr       */
+/*   Updated: 2021/11/05 14:56:00 by acolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	ft_gen_point(t_map *map)
 		j = -1;
 		while (++j < map->nbcol)
 		{
-			map->tpoint[i][j] = set_point(i, j, map->map[i][j] * map->zoom);
+			map->tpoint[i][j] = set_point(i, j, map->map[i][j] * 2);
 			if (!map->tpoint[i])
 				return (free_tpoint(map, i));
 		}

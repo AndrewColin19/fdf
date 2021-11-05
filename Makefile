@@ -1,6 +1,6 @@
 
 CC=gcc
-CFLAGS= -Wall -Wextra -Werror
+CFLAGS= -Wall -Wextra -Werror -g
 NAME= fdf
 SRCS =  srcs/main.c srcs/ft_draw_line.c \
 		srcs/get_next_line.c srcs/ft_check_file.c \
