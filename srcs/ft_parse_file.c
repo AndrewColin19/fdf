@@ -6,7 +6,7 @@
 /*   By: acolin <acolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 15:57:37 by andrew            #+#    #+#             */
-/*   Updated: 2021/11/04 17:19:19 by acolin           ###   ########.fr       */
+/*   Updated: 2021/11/07 18:50:11 by acolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ size_t	ft_tablen(char **tab)
 	return (i);
 }
 
-int	free_tab(char **tab)
+int	free_tab(char **tab, int size)
 {
 	int	i;
 
 	i = 0;
-	while (tab[i])
+	while (i < size)
 	{
 		free(tab[i]);
 		i++;
@@ -39,18 +39,20 @@ int	free_tab(char **tab)
 int	ft_add_map(char *line, t_map *map, int index)
 {
 	int		i;
+	int		size_tab;
 	char	**tab;
 
 	tab = ft_split(line, ' ');
 	i = 0;
-	map->map[index] = (int *) malloc(sizeof(int *) * ft_tablen(tab));
+	size_tab = ft_tablen(tab);
+	map->map[index] = malloc(sizeof(int *) * size_tab);
 	while (tab[i])
 	{
 		map->map[index][i] = ft_atoi(tab[i]);
 		i++;
 	}
 	map->nbcol = i;
-	free_tab(tab);
+	free_tab(tab, size_tab);
 	return (1);
 }
 
@@ -63,7 +65,7 @@ int	ft_parse_file(char *path, t_map *map)
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 		return (ft_error_file());
-	map->map = (int **) malloc(sizeof(int **) * map->nbline);
+	map->map = malloc(sizeof(int **) * map->nbline);
 	line = get_next_line(fd);
 	i = 0;
 	while (line)

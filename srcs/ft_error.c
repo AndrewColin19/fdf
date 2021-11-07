@@ -6,14 +6,15 @@
 /*   By: acolin <acolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 17:50:13 by andrew            #+#    #+#             */
-/*   Updated: 2021/11/04 17:50:17 by acolin           ###   ########.fr       */
+/*   Updated: 2021/11/07 18:02:39 by acolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-int	ft_error_data(void)
+int	ft_error_data(char *line)
 {
+	free(line);
 	ft_putendl_fd("data error", 1);
 	return (0);
 }

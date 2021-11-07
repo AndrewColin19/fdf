@@ -6,7 +6,7 @@
 /*   By: acolin <acolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 16:43:22 by acolin            #+#    #+#             */
-/*   Updated: 2021/11/05 14:56:00 by acolin           ###   ########.fr       */
+/*   Updated: 2021/11/07 18:56:22 by acolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,20 @@ t_point	set_point(int x, int y, int z)
 	point.y = y;
 	point.z = z;
 	return (point);
+}
+
+int free_map(t_map *map)
+{
+	int	i;
+
+	i = 0;
+	while (i < map->nbline)
+	{
+		free(map->map[i]);
+		i++;
+	}
+	free(map->map);
+	return (1);
 }
 
 int	free_tpoint(t_map *map, int ind)
@@ -50,6 +64,6 @@ int	ft_gen_point(t_map *map)
 				return (free_tpoint(map, i));
 		}
 	}
-	free(map->map);
+	free_map(map);
 	return (1);
 }

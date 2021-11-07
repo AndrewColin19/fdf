@@ -6,11 +6,18 @@
 /*   By: acolin <acolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 19:21:49 by andrew            #+#    #+#             */
-/*   Updated: 2021/11/04 16:15:03 by acolin           ###   ########.fr       */
+/*   Updated: 2021/11/07 18:30:21 by acolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
+
+int	ft_ishexa(char c)
+{
+	if (!ft_isdigit(c) && !(c >= 65 && c <= 70) && !(c >= 97 && c <= 102))
+		return (0);
+	return (1);
+}
 
 int	ft_check_line(char *line)
 {
@@ -23,8 +30,14 @@ int	ft_check_line(char *line)
 			i++;
 		if (line[i] == '-')
 			i++;
-		while (ft_isdigit(line[i]))
+		else if (line[i] == ',' || line[i] == 'x')
 			i++;
+		else if (ft_isdigit(line[i]))
+			i++;
+		else if (ft_ishexa(line[i]))
+			i++;
+		else
+			return (0);
 		i++;
 	}
 	return (1);
@@ -41,9 +54,14 @@ int	ft_check_file(char *path, t_map	*map)
 	line = get_next_line(fd);
 	while (line)
 	{
-		map->nbline++;
-		free(line);
-		line = get_next_line(fd);
+		if (ft_check_line(line))
+		{
+			map->nbline++;
+			free(line);
+			line = get_next_line(fd);
+		}
+		else
+			return (ft_error_data(line));
 	}
 	free(line);
 	close(fd);

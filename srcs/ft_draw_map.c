@@ -6,7 +6,7 @@
 /*   By: acolin <acolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 14:46:51 by andrew            #+#    #+#             */
-/*   Updated: 2021/11/05 14:53:24 by acolin           ###   ########.fr       */
+/*   Updated: 2021/11/07 18:30:37 by acolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	calc(t_map *map)
 int	ft_draw_map(t_map *map)
 {
 	int	i;
-	
+
 	map->start.x = map->centre.x;
 	map->start.y = map->centre.y;
 	i = -1;

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: acolin <acolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/28 13:56:03 by acolin            #+#    #+#             */
-/*   Updated: 2021/11/05 14:36:20 by acolin           ###   ########.fr       */
+/*   Created: 2021/11/07 18:34:54 by acolin            #+#    #+#             */
+/*   Updated: 2021/11/07 18:43:41 by acolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,11 @@ char	*get_next_line(int fd);
 int		ft_check_file(char *path, t_map	*map);
 int		ft_parse_file(char *path, t_map	*map);
 int		ft_draw_map(t_map *map);
+int		free_tpoint(t_map *map, int ind);
 t_point	iso_proj(t_point p);
 int		ft_gen_point(t_map *map);
 int		ft_error_file(void);
-int		ft_error_data(void);
+int		ft_error_data(char *line);
 int		ft_error_parse(void);
 int		ft_mouse_event(int button, int x, int y, void *param);
 int		ft_key_event(int key_code, void *param);
